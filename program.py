@@ -40,7 +40,6 @@ def parsing():
 	except BaseException:
 		print("не тот формат данных в файле")
 #=======================================
-#ip text_block 	username  data_time  file_route  code_and_number_of_bytes
 #(\w*) ?([>|<|=]) ?(\S*)
 #ip=356.0.0.0
 def function_2(text):
@@ -90,12 +89,13 @@ def filter_selection(abc,entering_filters):
 		return ""
 
 def viewing():
-	#try:
+	try:
 		choice = input("1.просмотр всей базы данных 2.просмотр с фильтрацией данных")
 		if choice=='1':
 			for i in sql.execute("SELECT * FROM recording_logs"):
 				print(i)
 		elif choice=='2':
+			print("филтровать можно ip text_block 	username  data_time  file_route  code_and_number_of_bytes")
 			print("< меньше, > больше, = равно, <= меньше или равно, >= больше или равно, -= не равен")
 			entering_filters = input()
 			for i in sql.execute("SELECT * FROM recording_logs"):
@@ -103,8 +103,8 @@ def viewing():
 					print("",end="")
 				else:
 					print(filter_selection(i,entering_filters))
-'''	except BaseException:
-		print("базы данных нет или она повреждена")'''
+	except BaseException:
+		print("базы данных нет или она повреждена")
 #=======================================
 start_end = True
 while(start_end):
