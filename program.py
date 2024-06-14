@@ -40,9 +40,6 @@ def parsing():
 	except BaseException:
 		print("не тот формат данных в файле")
 #=======================================
-#ip text_block 	username  data_time  file_route  code_and_number_of_bytes
-#(\w*) ?([>|<|=]) ?(\S*)
-#ip=356.0.0.0
 def function_2(text):
 	try:
 		return list(map(lambda x: [x.group(1),x.group(2),x.group(3)], text))
