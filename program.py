@@ -40,6 +40,9 @@ def parsing():
 	except BaseException:
 		print("не тот формат данных в файле")
 #=======================================
+#ip text_block 	username  data_time  file_route  code_and_number_of_bytes
+#(\w*) ?([>|<|=]) ?(\S*)
+#ip=356.0.0.0
 def function_2(text):
 	try:
 		return list(map(lambda x: [x.group(1),x.group(2),x.group(3)], text))
@@ -93,14 +96,20 @@ def viewing():
 			for i in sql.execute("SELECT * FROM recording_logs"):
 				print(i)
 		elif choice=='2':
-			print("филтровать можно ip text_block 	username  data_time  file_route  code_and_number_of_bytes")
+			print("сортировать можно по нескольким фильтрам и между ними надо ставить пробел")
+			print("пример: ip<127.0.0.0 code_and_number_of_bytes>404 7218")
+			print("данные по которым можно сортировать: ip text_block  username  data_time file_route code_and_number_of_bytes")
 			print("< меньше, > больше, = равно, <= меньше или равно, >= больше или равно, -= не равен")
 			entering_filters = input()
+			check = True
 			for i in sql.execute("SELECT * FROM recording_logs"):
 				if (filter_selection(i,entering_filters) ==""):
 					print("",end="")
 				else:
 					print(filter_selection(i,entering_filters))
+					check=False
+			if (check == True):
+				print("нет совподений")
 	except BaseException:
 		print("базы данных нет или она повреждена")
 #=======================================
